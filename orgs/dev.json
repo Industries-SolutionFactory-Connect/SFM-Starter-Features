@@ -1,6 +1,7 @@
 {
   "orgName": "SFM-Starter-Features - Dev Org",
   "edition": "Developer",
+  "features": ["SalesforceFeedbackManagementStarter","AnalyticsAdminPerms","AnalyticsAppEmbedded"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
@@ -16,6 +17,10 @@
       "sessionSettings": {
         "forceRelogin": false
       }
+    },
+    "surveySettings":{
+      "enableSurvey":true,
+      "enableSurveyOwnerCanManageResponse":true
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
