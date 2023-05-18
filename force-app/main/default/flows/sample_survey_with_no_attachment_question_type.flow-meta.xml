@@ -291,7 +291,26 @@
             <stringValue>Survey</stringValue>
         </value>
     </processMetadataValues>
+    <processMetadataValues>
+        <name>svAddlInfo_EmailTemplate</name>
+        <value>
+            <stringValue>Embed_a_Survey_Link</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>svAddlInfo_InvitationSharingRole</name>
+        <value>
+            <stringValue>InvitationRecordCreator</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>svAddlInfo_Language</name>
+        <value>
+            <stringValue>en_US</stringValue>
+        </value>
+    </processMetadataValues>
     <processType>Survey</processType>
+    <runInMode>SystemModeWithSharing</runInMode>
     <screens>
         <name>p_ebdcb123_e850_4cf9_9f43_0c49f4a4a2a2</name>
         <label>Different Survey Types</label>
