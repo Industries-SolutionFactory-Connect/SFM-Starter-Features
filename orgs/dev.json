@@ -22,6 +22,9 @@
       "enableSurvey":true,
       "enableSurveyOwnerCanManageResponse":true
     },
+    "communitySettings":{
+      "enableNetworksEnabled":true
+    },
     "languageSettings": {
       "enableTranslationWorkbench": true
     }
