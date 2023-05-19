@@ -22,8 +22,12 @@
       "enableSurvey":true,
       "enableSurveyOwnerCanManageResponse":true
     },
-    "communitySettings":{
-      "enableNetworksEnabled":true
+    "communitiesSettings": {
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
