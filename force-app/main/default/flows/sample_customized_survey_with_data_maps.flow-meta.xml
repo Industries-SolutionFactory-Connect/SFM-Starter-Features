@@ -30,6 +30,19 @@
             <targetReference>welcome_page</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>recordLookupFaultConnectorAssignment</name>
+        <label>recordLookupFaultConnectorAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>faultMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!$Flow.FaultMessage}</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
     <choices>
         <name>c_6b8ba2ad_d03a_470e_9c42_69b336229813</name>
         <choiceText>Yes</choiceText>
@@ -69,7 +82,7 @@
     <processMetadataValues>
         <name>dataMapVersion</name>
         <value>
-            <numberValue>2.0</numberValue>
+            <numberValue>4.0</numberValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -91,6 +104,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>participantMergeFieldName</name>
+        <value>
+            <stringValue>ContactName</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>surveyType</name>
         <value>
             <stringValue>Survey</stringValue>
@@ -109,7 +128,115 @@
         </value>
     </processMetadataValues>
     <processType>Survey</processType>
-    <runInMode>DefaultMode</runInMode>
+    <recordLookups>
+        <name>surveyParticipantRecordLookup_ContactName</name>
+        <label>surveyParticipantRecordLookup_ContactName</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>targetParticipantLookup_ContactName</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>recordLookupFaultConnectorAssignment</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <processMetadataValues>
+                <name>inputDataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Id</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>operatorDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>invitationId</elementReference>
+            </value>
+        </filters>
+        <object>SurveyInvitation</object>
+        <outputAssignments>
+            <assignToReference>surveyParticipantLookupIdVar</assignToReference>
+            <field>ParticipantId</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>targetParticipantLookup_ContactName</name>
+        <label>targetParticipantLookup_ContactName</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>pageNamesInOrder_Assignment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <processMetadataValues>
+                <name>inputDataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Id</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>operatorDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>surveyParticipantLookupIdVar</elementReference>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <outputReference>ContactName</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+    </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>p_381a8c69_89bc_4c77_9d09_a19f98f7724e</name>
         <label>Page 2</label>
@@ -280,7 +407,7 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <startElementReference>pageNamesInOrder_Assignment</startElementReference>
+    <startElementReference>surveyParticipantRecordLookup_ContactName</startElementReference>
     <status>Active</status>
     <textTemplates>
         <name>thankYouDescriptionTextTemplate</name>
@@ -295,8 +422,26 @@
     <textTemplates>
         <name>welcome_question_lref_tt</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Lets explore the following customizations that are used on this Survey&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Show Survey Pages Based on Merge Fields&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Use Merge Fields to Personalize Surveys&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Data Mapping to capture the feedback into Salesforce Objects&lt;/em&gt;&lt;/p&gt;</text>
+        <text>&lt;p&gt;Hi {!ContactName.Name}&lt;strong&gt;&lt;span class=&quot;ql-cursor&quot;&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Lets explore the following customizations that are used on this Survey&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Show Survey Pages Based on Merge Fields&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Use Merge Fields to Personalize Surveys&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;- Data Mapping to capture the feedback into Salesforce Objects&lt;/em&gt;&lt;/p&gt;</text>
     </textTemplates>
+    <variables>
+        <name>ContactName</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>faultMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
     <variables>
         <name>guestUserLang</name>
         <dataType>String</dataType>
@@ -330,6 +475,13 @@
         <value>
             <booleanValue>false</booleanValue>
         </value>
+    </variables>
+    <variables>
+        <name>surveyParticipantLookupIdVar</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>thankYouDescription</name>
